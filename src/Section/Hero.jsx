@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../Components/Button";
 import ShoeCard from "../Components/ShoeCard";
 import { shoes, statistics } from "../Constants";
@@ -5,12 +6,13 @@ import { arrowRight } from "../assets/icons";
 import { bigShoe1 } from "../assets/images";
 
 const Hero = () => {
+  const [bigShoeImg, setBigShoeImg] = useState(bigShoe1);
   return (
     <section
       id="home"
       className="w-full flex xl:flex-row flex-col justify-center  gap-10  min-h-screen  p-2 max-container"
     >
-      <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full max-xl: padding-x pt-28">
+      <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full max-xl:padding-x pt-28">
         <p className="text-coral-red text-xl font-montserrat ">
           Our Summer Collections
         </p>
@@ -39,21 +41,23 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-hero bg-primary bg-contain bg-center">
+      <div className="relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-hero bg-primary bg-cover  bg-center">
         <img
-          src={bigShoe1}
+          src={bigShoeImg}
           alt="Shoe-Collection"
           className="object-contain relative z-10"
           width={610}
           height={500}
         />
-        <div className="absolute origin-bottom-right flex justify-center items-center">
-          {shoes.map((shoe) => (
-            <div key={shoe}>
+        <div className="flex sm:gap-4 absolute -bottom-[5%] sm:left-[10%] max-sm:px-6">
+          {shoes.map((shoe, index) => (
+            <div key={index}>
               <ShoeCard
                 imgURL={shoe}
-                changeBigShoeImage={() => {}}
-                bigShoeImg=""
+                changeBigShoeImage={(shoe) => {
+                  setBigShoeImg(shoe);
+                }}
+                bigShoeImg={bigShoeImg}
               />
             </div>
           ))}
